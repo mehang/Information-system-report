@@ -50,7 +50,7 @@ Email: mehang.rai007@gmail.com}
 Apache Hadoop is an open-source software framework for distributed storage
 and distributed processing of very large data sets on computer clusters built from commodity
 hardware.\cite{Apache} Hadoop is an Apache top-level project being built and used by a global
-community of contributors and users. It is licensed under the Apache License 2.0.\cite{Introapahe} 
+community of contributors and users. It is licensed under the Apache License 2.0.\cite{Introapache} 
 Hadoop was created by Doug Cutting and Mike Cafarella in 2005.
 \par The Hadoop framework is mostly written in Java programming language,
 with some native code in C programming language and command line utilities
@@ -142,40 +142,127 @@ The JobTracker pushes work out to available TaskTracker nodes in the cluster, st
 \end{enumerate}
 
 
+\section{Hadoop And Scalability}
 
-\subsection{Subsection Heading Here}
-\blindtext
+\subsection{A word on Scalability}
+
+Scalability is difficult to define. \cite{Hill1990} Mostly because, while it is valued, its characteristics and
+the characteristics that undermine it are usually only apparent from the context. However,
+we can say that Scalability is the capability of a system, network, or process to handle a
+growing amount of work, or its potential to be enlarged in order to accommodate that
+growth. \cite{Bondi2000}
+
+Consequently, a system whose performance improves after adding hardware,
+proportionally to the capacity added, is said to be a scalable system.
+
+Scalability can be distinguished based on the methods used to achieve it:
+
+Horizontal scaling also referred to as “scale out” means that we scale by adding more
+machines into our pool of resources.
+Vertical scaling or “scale up” means that we scale by adding more power (CPU, RAM) to
+our existing machine.
+
+\subsection{Scalability in Hadoop}
+
+Hadoop achieves scalability by scaling out. We can add new nodes as necessary and without needing to change data formats, data loading procedures, how jobs are written, or the applications on top.
+
+So, the idea behind Hadoop is to provide scalability through the ability to use cheap commodity clusters on a distributed file system. 
+Also, the inexpensive servers run on parallel. 
+
+So, almost all the features of Hadoop contribute to its scalability:
+
+\begin{itemize}
+
+    \item \textbf{Cost-Effectiveness:} Hadoop reduces the cost of processing huge amounts of data by making use of cheap, commodity hardware. 
+            It is not necessary to invest heavily on high-end servers and machines. 
+            This cost-effectiveness means that it is easier to scale.
+
+    \item \textbf{Flexibility:} Hadoop accepts any type of data, structured or not, as long as they can be stored in a file. 
+            It is schema-less and can join data arbitrarily from multiple sources. 
+            So, the traditional Extract Load Transform (ETL) process can be avoided. 
+            This is the better approach when handling large amounts of data during the scaling process.
+
+   \item \textbf{Fault-tolerance:} When a node goes down, the system automatically redirects work to another location of the same data. 
+       This type of fault-tolerance is crucial when the amount of data and possibilities of failures grow when scaling.
+
+\end{itemize}
+
+\subsection{Limitations on Scalability in Hadoop 1.x and their solutions in Hadoop 2.x}
+
+\textbf{Namenode as the single point of failure}
+
+The namenode (the dedicated server that maintains the namespace) is the single point of failure in Hadoop 1.x 
+and the ability to scale is hampered by its memory as it keeps the entire namespace in RAM. 
+So, as the number of data nodes increases, the high load on the single centralized namenode server means 
+that the performance and availability of the clusters are hampered, eventually affecting the overall scalability. 
+Thus, the scalability of the overall system is held back by the scalability of the namenode \cite{Shvachko2010}, especially in 
+cases where the files are generally small in size and numerous. Even if the system could scale horizontally, the 
+namenode could only scale vertically. 
+
+Also, the collocation of namespace and block management in the namenode meant that the two layers were too coupled. 
+
+In the Yahoo! Paper describing the HDFS \cite{Shvachko2010b}, the authors acknowledged this problem and described their near term 
+solution of “allowing multiple namespaces (and NameNodes) to share the physical storage within a cluster”.
+
+However, multiple namespaces have the drawback of the additional burden of actually managing them. 
+
+Still, many proposed solutions used multiple namespaces in one form or the other. \cite{Singh2012}
+
+Hadoop 2.x tackled this issue by introducing features such as the Hadoop Federation.
+
+\begin{figure}[h!]
+        \centering
+        \includegraphics[width=80mm]{HDFS_Federation}
+        \caption{HDFS Federation Architecture}
+\end{figure}
+
+Federation makes use of multiple namenodes/namespaces that are federated meaning they are independent and do not 
+require coordination with each other. The datanodes are used as common storage for blocks by all the namenodes. 
+Each datanode registers with all the namenodes in the cluster. Datanodes send periodic heartbeats and block reports 
+and handles commands from the namenodes.\cite{Suresh2011}
+
+\textbf{Overburdened JobTracker}
+
+In Hadoop 1.0, there is tight coupling between Cluster Resource Management and MapReduce programming model. 
+Job Tracker, which does resource management, is part of the MapReduce Framework. 
+This limits the scalability as the Job Tracker is running on a single machine doing a variety of activities like 
+resource management, job and task scheduling, monitoring, etc while a lot of machines (the datanodes) are not utilized fully.
+
+Hadoop 2.x solved this issue by introducing YARN which splits the two major functionalities of Job Tracker—resource 
+management and job scheduling/monitoring into two separate components: Resource manager and Node Manager. 
+YARN also took over the task of cluster management from MapReduce so that MapReduce is streamlined to only perform Data Processing.
+
+\textbf{Limitation in running non-MapReduce Application}
+
+Another of the ill-effects of Job tracker’s tight integration with MapReduce in Hadoop 1.0 is that only supporting application 
+that obeys MapReduce programming framework can run on Hadoop. 
+
+This is a problem as MapReduce is not always the best choice of programming paradigm. 
+For instance, in cases like real-time analysis, message-passing between processes, running Ad-hoc query, etc, 
+MapReduce performs badly or cannot do them altogether. So, systems that would require services like these when scaling 
+would be held back by Hadoop. 
+
+Again, Hadoop 2.x solves it with YARN as it decouples the resource management and data processing part of MapReduce. 
+Thus, it allows other distributed computing models like Spark, Hama, Giraph, MPI (Message Passing Interface) and HBase 
+coprocessors to work with Hadoop. 
 
 
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation Results}
-%\label{fig_sim}
-%\end{figure}
-
-% Note that IEEE typically puts floats only at the top, even when this
-% results in a large percentage of a column being occupied by floats.
-
-
-%
 \section{Conclusion}
-\blindtext
 
+Ever since its introduction, Hadoop has been proving to be a boon for the field of Big Data. 
+
+Although, Hadoop is generally great at providing Scalability by scaling out, as noted in \cite{Appuswamy2013}, sometimes it may be 
+reasonable to scale up using Hadoop too. They note that the majority of real-world analytic jobs process less than 100 GB of input. 
+So, in those cases, a single "scale-up" server might provide similar if not better performance to a bunch/cluster of smaller servers.
+
+In any case, Hadoop--especially with the features/improvements added in the 2.x versions--provides excellent scalability and data storage and processing
+capability when working in the peta-scale.
 
 
 
 
 \appendices
-\section{Proof of the First Zonklar Equation}
-\blindtext
-
-% use section* for acknowledgement
 \section*{Acknowledgment}
-
 
 The authors would like to thank...
 
@@ -183,7 +270,6 @@ The authors would like to thank...
 \ifCLASSOPTIONcaptionsoff
   \newpage
 \fi
-
 
 
 \begin{thebibliography}{1}
@@ -202,9 +288,41 @@ The authors would like to thank...
 \bibitem{Wikiapache}
         \emph{Apache Hadoop.}
         https://en.wikipedia.org/wiki/Apache\_Hadoop.
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+%Scalability
+
+\bibitem{Hill1990}
+    Hill, Mark D. \emph{What is scalability?} 
+    ACM SIGARCH Computer Architecture News 18.4 (1990): 18-21.
+
+\bibitem{Bondi2000}
+    Bondi, André B. \emph{Characteristics of scalability and their impact on performance.}
+    Proceedings of the 2nd international workshop on Software and performance. ACM,
+    2000.
+
+\bibitem{Shvachko2010}
+    K. V. Shvachko, \emph{HDFS Scalability: The limits to growth,} 
+    ;login:. April 2010, pp. 6–16.
+
+\bibitem{Shvachko2010b}
+    Shvachko, Konstantin, et al. \emph{The hadoop distributed file system.} 
+    Mass Storage Systems and Technologies (MSST), 2010 IEEE 26th Symposium on. IEEE, 2010.
+
+\bibitem{Singh2012}
+    Singh, Harcharan Jit. 
+    \emph{High scalability of hdfs using distributed namespace} 
+    Diss. THAPAR UNIVERSITY PATIALA, 2012.
+
+\bibitem{Suresh2011}
+    Srinivas, Suresh.
+    \emph{An Introduction to HDFS Federation}
+    August 2011,
+    http://hortonworks.com/blog/an-introduction-to-hdfs-federation/
+
+%Conclusion
+\bibitem{Appuswamy2013}
+        Appuswamy, Raja, et al. \emph{Scale-up vs Scale-out for Hadoop: Time to rethink?.} 
+        Proceedings of the 4th annual Symposium on Cloud Computing. ACM, 2013.
 
 \end{thebibliography}
 

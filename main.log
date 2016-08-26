@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.7.17)  26 AUG 2016 01:12
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.24)  26 AUG 2016 08:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -235,11 +235,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 52.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 52.
-
-
-Package natbib Warning: Citation `Introapahe' on page 1 undefined on input line
- 53.
-
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ú in font ptmr7t!
@@ -294,6 +289,7 @@ Missing character: There is no ô in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
+
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
@@ -328,23 +324,71 @@ Missing character: There is no ô in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
 [3 <./mapreduce.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 196--198
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
+ <HDFS_Federation.png, id=21, 393.47pt x 236.885pt>
+File: HDFS_Federation.png Graphic file (type png)
+
+<use HDFS_Federation.png>
+Package pdftex.def Info: HDFS_Federation.png used on input line 215.
+(pdftex.def)             Requested size: 227.62204pt x 137.03554pt.
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no î in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+ [4 <./HDFS_Federation.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 271--273
 []\OT1/ptm/m/it/10 An in-tro-duc-tion to Apache Hadoop.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--198
+Underfull \hbox (badness 10000) in paragraph at lines 271--273
 \OT1/ptm/m/n/10 https://opensource.com/life/14/8/intro-apache-hadoop-
  []
 
 
-Overfull \hbox (21.67786pt too wide) in paragraph at lines 203--205
+Overfull \hbox (21.67786pt too wide) in paragraph at lines 278--280
 []\OT1/ptm/m/it/10 Apache Hadoop. \OT1/ptm/m/n/10 https://en.wikipedia.org/wiki
 /Apache[]Hadoop. 
  []
 
-** WARNING: \IEEEbiography is locked out when in conference mode (line 212).
+Missing character: There is no √ in font ptmr7t!
+Missing character: There is no © in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ì in font ptmr7t!
+
+Underfull \hbox (badness 4805) in paragraph at lines 304--308
+[]\OT1/ptm/m/n/10 Srinivas, Suresh. \OT1/ptm/m/it/10 An In-tro-duc-tion to HDFS
+ Fed-
+ []
+
+
+Underfull \hbox (badness 3364) in paragraph at lines 304--308
+\OT1/ptm/m/it/10 er-a-tion \OT1/ptm/m/n/10 Au-gust 2011, http://hortonworks.com
+/blog/an-
+ []
+
+** WARNING: \IEEEbiography is locked out when in conference mode (line 312).
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -356,29 +400,27 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-
-Package natbib Warning: There were undefined citations.
-
-[4
+[5
 
 ] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 2707 strings out of 493304
- 42097 string characters out of 6139871
- 111326 words of memory out of 5000000
- 6156 multiletter control sequences out of 15000+600000
- 37435 words of font info for 66 fonts, out of 8000000 for 9000
+ 2724 strings out of 493304
+ 42444 string characters out of 6139871
+ 111402 words of memory out of 5000000
+ 6174 multiletter control sequences out of 15000+600000
+ 35192 words of font info for 64 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,8n,23p,947b,310s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
-r/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/t
-imes/utmri8a.pfb>
-Output written on main.pdf (4 pages, 348927 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
+mri8a.pfb>
+Output written on main.pdf (5 pages, 411695 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 48 PDF objects out of 1000 (max. 8388607)
+ 29 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
