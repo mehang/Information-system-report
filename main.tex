@@ -139,6 +139,50 @@ The JobTracker pushes work out to available TaskTracker nodes in the cluster, st
 \par MapReduce programming is not a good match for all problems. It’s good for simple information requests and problems that can be divided into independent units, but it's not efficient for iterative and interactive analytic tasks. MapReduce is file-intensive. Because the nodes don’t intercommunicate except through sorts and shuffles, iterative algorithms require multiple map-shuffle/sort-reduce phases to complete. This creates multiple files between MapReduce phases and is inefficient for advanced analytic computing.
 
         \item \textbf{Hadoop YARN:}
+            YARN (Yet Another Resource Negotiator) is Hadoop’s cluster resource management
+system. YARN was introduced in Hadoop 2.0 to improve the MapReduce implementation,
+but it is general enough to support other distributed computing paradigms
+as well.\\
+
+The fundamental idea of YARN is to split up the two major responsibilities of the JobTracker,
+in other words resource management and job scheduling/monitoring, into separate daemons: a
+global ResourceManager and per-application ApplicationMaster (AM). The ResourceManager
+and per-node slave, the NodeManager (NM), form the new, and \textit{generic}, operating system for
+managing applications in a distributed manner. 
+
+The ResourceManager is the ultimate authority that arbitrates resources among all the
+applications in the system. The per-application ApplicationMaster is, in effect, a \textit{framework
+specific} entity and is tasked with negotiating resources from the ResourceManager and working
+with the NodeManager(s) to execute and monitor the component tasks.
+
+The ResourceManager has a pluggable scheduler component, which is responsible for
+allocating resources to the various running applications subject to familiar constraints of
+capacities, queues etc. The Scheduler is a \textit{pure scheduler} in the sense that it performs no
+monitoring or tracking of status for the application, offering no guarantees on restarting failed
+tasks either due to application failure or hardware failures. The scheduler performs its
+scheduling function based on the \textit{resource requirements} of an application by using the abstract
+notion of a \textit{resource container}, which incorporates resource dimensions such as memory, CPU,
+disk, network etc. 
+
+The NodeManager is the per-machine slave, which is responsible for launching the
+applications’ containers, monitoring their resource usage (CPU, memory, disk, network), and
+reporting the same to the ResourceManager. 
+
+The per-application ApplicationMaster has the responsibility of negotiating appropriate
+resource containers from the Scheduler, tracking their status and monitoring for progress. From
+the system perspective, the ApplicationMaster itself runs as a normal \textit{container}.
+
+\begin{figure}[h!]
+        \centering
+        \includegraphics[width=80mm]{yarn}
+        \caption{Architectural view of YARN}
+\end{figure}
+
+One of the crucial implementation details for MapReduce within the new YARN system is the
+reuse of the existing MapReduce framework without any major surgery. This step was very
+important to ensure compatibility for existing MapReduce applications and users. 
+
+
 \end{enumerate}
 
 
@@ -246,6 +290,47 @@ Again, Hadoop 2.x solves it with YARN as it decouples the resource management an
 Thus, it allows other distributed computing models like Spark, Hama, Giraph, MPI (Message Passing Interface) and HBase 
 coprocessors to work with Hadoop. 
 
+\section{Future of Hadoop}
+
+It is forecasted that the global Hadoop market value will reach \$50.2 billion 
+by 2020. In the next few years, more enterprises will adopt a data-driven 
+business and will look to Hadoop to support their growth. Hadoop will allow 
+for leaner, faster and more efficient enterprises. The focus on Hadoop will 
+also create opportunities for new entrants in the market, to rise to and solve 
+its challenges. In future, Hadoop will be used by world-class enterprises, 
+as well as businesses of all sizes for managing, processing and leveraging 
+data to better serve their customers.
+
+\subsection{Hadoop will Power the Connected World}
+As each company connects to various partners, customers, vendors and things,
+the ocean of data grows and becomes intertwined with data lakes and rivers. 
+Hadoop will power this connected world and it will be used to address
+uses cases that require a mix of batch, real-time, streaming and interactive 
+scenarios.
+
+\subsection{Hadoop Will Be Used for Processing and Storing Highly Sensitive Data}
+The lack of built-in security in Hadoop is an obstacle that enterprises face 
+today, but new tools are emerging that address this issue, connecting Kerberos 
+and MapReduce components and ensuring compatibility between data. In Future, 
+expect these issues to resolved and highly regulated organizations to be managing their secure data with Hadoop.
+
+\subsection{Hadoop Will Advance the Internet of Things}
+The Internet of things is only possible with instant data processing and prescriptive analytics. As more things enter the data ecosystem, the burden of processing will become greater and legacy technology will not be able to keep up. Hadoop will be able to, and it will be a mission-critical foundation for many businesses tied to the Internet of things.
+
+\subsection{Hadoop Will Be Used for Critical Day-to-Day Operations}
+As Hadoop is used more and the capabilities of YARN become fully realized, more useful opportunities leveraging technology like Apache Spark and Storm will emerge and quickly increase its potential. Even now, real-time/operational analytics are the fastest moving part of the Hadoop ecosystem, and Hadoop will be relied on for day-to-day enterprise operations.
+
+\subsection{Hadoop Will Power the Startup Economy}
+Startups represent the future of the industry and are already following the Hadoop path rather than the traditional architectures for cost and efficiency reasons. As they grow, innovate and gain popularity, adoption of their services and Hadoop will correlate, leading to exponential growth.
+
+\subsection{Hadoop Will Accelerate Big Data Adoption}
+Big data is only as good as the quality of data you have. In order to get the most out of data, large amounts of information need to be processed in real time. A recent study found that nearly half of all organizations are developing big data strategies to achieve better decision-making and identify new trends to better engage with customers. Hadoop's low price tag will allow companies of all sizes to adopt big data strategies and begin to benefit from them sooner.
+
+\subsection{Hadoop Will Democratize Data}
+New entrants in the IT industry will afford to create and manage their own data warehouses because of the low-cost of Hadoop. This has yet to be adopted due to the inherent complexity of the technology, but even so, companies are beginning to form with the sole purpose of making Hadoop user-friendly. With the current speed of innovation and lower cost of entry, in just five years, we will see small and midsize enterprises investing in their own Hadoop-based infrastructure.
+
+\subsection{Hadoop Will Lead in Infrastructure Spending}
+Hadoop has the potential to completely reshape the IT infrastructure of many companies. The technology may be playing a larger role on the IT road map than in the enterprise right now, but this will flip in the future. In future, most enterprises will have IT strategies that leverage Hadoop, and it will be their greatest infrastructure investment.
 
 \section{Conclusion}
 
@@ -257,9 +342,6 @@ So, in those cases, a single "scale-up" server might provide similar if not bett
 
 In any case, Hadoop--especially with the features/improvements added in the 2.x versions--provides excellent scalability and data storage and processing
 capability when working in the peta-scale.
-
-
-
 
 \appendices
 \section*{Acknowledgment}
