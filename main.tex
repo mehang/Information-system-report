@@ -1,52 +1,172 @@
+\documentclass[a4paper,12pt,oneside]{report}
+%this is for left,right,top,right margin
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{chngcntr}
+\usepackage[english]{babel}
 
-\documentclass[conference]{IEEEtran}
-\usepackage{blindtext, graphicx}
-\usepackage[super,square]{natbib}
+\pagestyle{myheadings} \setcounter{secnumdepth}{4} \setcounter{tocdepth}{4}
+\renewcommand{\bibname}{\normalfont\fontsize{14pt}{0pt}\selectfont\bfseries REFERENCES}
+\renewcommand{\listfigurename}{\fontsize{14pt}{0pt}\selectfont LIST OF FIGURES}
+\renewcommand{\listtablename}{\fontsize{14pt}{0pt}\selectfont LIST OF TABLES}
+\renewcommand{\thesection}{\fontsize{14pt}{0pt}\selectfont\arabic{section}}
+\titleformat{\section}{\normalfont\fontsize{14pt}{0pt}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{12pt}{0pt}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\fontsize{12pt}{0pt}\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\chapter}[display]
+{\normalfont\Large\filcenter}
+{\vspace*{\fill}
+        \titlerule[1pt]%
+        \vspace{1pt}%
+        \titlerule
+        \vspace{1pc}%
+\LARGE\MakeUppercase{\chaptertitlename}~\thechapter}
+{1pc}
+{\titlerule\Huge}
+[\vspace*{\fill}\newpage]
+\titlespacing*{\section}
+{0pt}{7.8ex plus 1ex minus .2ex}{8.8ex plus 1ex minus .2ex}
+\titlespacing*{\subsection}
+{0pt}{4.3ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+\titlespacing*{\subsubsection}
+{0pt}{6.3ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 
 
+\geometry{
+        a4paper,
+        total={170mm,257mm},
+        top=35mm,
+        left=35mm, right=20mm,
+        bottom=20mm
+}
+\renewcommand{\baselinestretch}{1.5} \renewcommand{\contentsname}{\fontsize{14pt}{0pt}\selectfont TABLE OF CONTENTS}
 
-\begin{document}
-\title{Scalability of Hadoop Framework}
+\fancypagestyle{myheadings}
+\fancyhf{}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+%\fancyhead[LE]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\rhead{\thepage}
+\pagestyle{fancy}
 
-\author{\IEEEauthorblockN{Ayush Shakya}
-\IEEEauthorblockA{Deparment of Electronics and\\Computer Engineering\\
-Institute of Engineering,\\
-Pulchowk, Lalitpur\\
-Email: }
-\and
-\IEEEauthorblockN{Bijay Gurung}
-\IEEEauthorblockA{Deparment of Electronics and\\Computer Engineering\\
-Institute of Engineering,\\
-Pulchowk, Lalitpur\\
-Email:}
-\and
-\IEEEauthorblockN{Mahendra Singh Thapa}
-\IEEEauthorblockA{Deparment of Electronics and\\Computer Engineering\\
-Institute of Engineering,\\
-Pulchowk, Lalitpur\\
-Email:}
-\and
-\IEEEauthorblockN{Mehang Rai}
-\IEEEauthorblockA{Deparment of Electronics and\\Computer Engineering\\
-Institute of Engineering,\\
-Pulchowk, Lalitpur\\
-Email: mehang.rai007@gmail.com}
+\makeatletter
+\renewcommand\tableofcontents{%
+        \if@twocolumn
+        \@restonecoltrue\onecolumn
+        \else
+        \@restonecolfalse
+        \fi
+        \section*{\contentsname
+                \@mkboth{%
+        \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+        \@starttoc{toc}%
+        \if@restonecol\twocolumn\fi
+}
+\renewcommand\listoffigures{%
+        \if@twocolumn
+        \@restonecoltrue\onecolumn
+        \else
+        \@restonecolfalse
+        \fi
+        \section*{\listfigurename
+                \@mkboth{%
+        \MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}}%
+        \@starttoc{lof}%
+        \if@restonecol\twocolumn\fi
 }
 
-\maketitle
-\begin{abstract}
-        Written at last.
-\end{abstract}
-% Note that keywords are not normally used for peerreview papers.
-\begin{IEEEkeywords}
-        Hadoop, scalability, distributed system, MapReduce.
-\end{IEEEkeywords}
+\renewcommand\listoftables{%
+        \if@twocolumn
+        \@restonecoltrue\onecolumn
+        \else
+        \@restonecolfalse
+        \fi
+        \section*{\listtablename
+                \@mkboth{%
+        \MakeUppercase\listtablename}{\MakeUppercase\listtablename}}%
+        \@starttoc{lot}%
+        \if@restonecol\twocolumn\fi
+}
 
-\IEEEpeerreviewmaketitle
+
+\renewenvironment{thebibliography}[1]
+{\section*{\bibname}% <-- this line was changed from \chapter* to \section*
+        \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+        \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+                \leftmargin\labelwidth
+                \advance\leftmargin\labelsep
+                \@openbib@code
+                \usecounter{enumiv}%
+                \let\p@enumiv\@empty
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+        \sloppy
+        \clubpenalty4000
+        \@clubpenalty \clubpenalty
+        \widowpenalty4000%
+\sfcode`\.\@m}
+{\def\@noitemerr
+        {\@latex@warning{Empty `thebibliography' environment}}%
+\endlist}
 
 
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{0ex}%
+        {4.5ex plus 1ex minus .2ex}%change the upper space
+        {-3ex plus 1ex minus .2ex}
+        %-4 changes the space at which text start
+{\normalfont\fontsize{12pt}{0pt}\underline}}
 
-\section{Introduction}
+
+\makeatother
+
+\newenvironment{nscenter}
+{\parskip=0pt\par\nopagebreak\centering}
+{\par\noindent\ignorespacesafterend}
+\begin{document}
+\pagenumbering{roman}
+\input{coverpage}
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{2}
+
+
+\newpage
+\section*{ABSTRACT}
+\addcontentsline{toc}{section}{\numberline{} ABSTRACT}
+To write at last.
+Keywords: Hadoop, scalability, distributed system, MapReduce.
+\clearpage
+\thispagestyle{fancy}
+\addcontentsline{toc}{section}{\numberline{} TABLE OF CONTENTS}
+\tableofcontents
+\thispagestyle{fancy}
+%\newgeometry{left=3.5cm,top=3.5cm,right=2cm,bottom=2cm}
+
+\newpage
+\addcontentsline{toc}{section}{\numberline{} LIST OF FIGURES}
+\listoffigures{\thispagestyle{fancy}}
+
+%\newpage
+%\addcontentsline{toc}{section}{\numberline{} LIST OF TABLES}
+%\listoftables{\thispagestyle{fancy}}
+
+%\restoregeometry
+
+\newpage
+\section{INTRODUCTION}
+\pagenumbering{arabic}
+\subsection{Overview}
 Apache Hadoop is an open-source software framework for distributed storage
 and distributed processing of very large data sets on computer clusters built from commodity
 hardware.\cite{Apache} Hadoop is an Apache top-level project being built and used by a global
@@ -62,7 +182,7 @@ hardware failures are common and should be automatically handled by the framewor
 It provides massive storage for any kind of data, enormous processing power and the ability to handle virtually
 limitless concurrent tasks or jobs.
 \par Some key features of Hadoop are:
-\begin{enumerate}
+\begin{enumerate}[(i)]
         \item \textbf{Ability to store and process huge amounts of any kind of data quickly:}
                 With data volumes and varieties constantly increasing, especially from social media and the Internet of Things(IoT), that’s a key consideration.
         \item \textbf{Computing power:} Hadoop’s distributed computing model processes big data fast. The more computing nodes you use, the more processing power you have.
@@ -80,7 +200,7 @@ gain deeper insights quickly. But hadoop must not be confused as a database. You
 data transfer rates among nodes and allows the system to continue operating uninterrupted in case of a node failure. This approach lowers the risk of catastrphic system failure,
 even if a significant number of nodes become inoperative.
 
-\section{History of Hadoop}
+\subsection{Background}
 As the World Wide Web grew in the late 1900s and early 2000s, search engines and indexes were created to help locate relevant information amid the text-based content. In the early years, search results were returned by humans. But as the web grew from dozens to millions of pages, automation was needed. Web crawlers were created, many as university-led research projects, and search engine start-ups took off (Yahoo, AltaVista, etc.).
 \par One such project was an open-source web search engine called Nutch – the brainchild of Doug Cutting and Mike Cafarella. They wanted to return web search results faster by distributing data and calculations across different computers so multiple tasks could be accomplished simultaneously. During this time, another search engine project called Google was in progress. It was based on the same concept – storing and processing data in a distributed, automated way so that relevant web search results could be returned faster.
 \par In 2006, Cutting joined Yahoo and took with him the Nutch project as well as ideas based on Google’s early work with automating distributed data storage and processing which was published in October 2003. This paper spawned another research paper from Google - MapReduce: Simplified Data Processing on Large Clusters in December, 2004. The Nutch project was divided – the web crawler portion remained as Nutch and the distributed computing and processing portion became Hadoop (named after Cutting’s son’s yellow plush toy elephant). In 2008, Yahoo released Hadoop as an open-source project. The initial code that was factored out of Nutch consisted of 5k lines of code for NDFS and 6k lines of code for MapReduce. Today, Hadoop’s framework and ecosystem of technologies are managed and maintained by the non-profit Apache Software Foundation (ASF), a global community of software developers and contributors.
@@ -94,7 +214,23 @@ development, there are popular companies like Facebook, eBay, etc. are contribut
 \par Cloudera was founded in 2008 to commercialize Apache Hadoop, with an awareness of three key trends that are changing the way the entire industry stores and uses data. These changes came first to consumer Internet properties, but loom large or commercial, defense, and
 intelligence applicaitons as well.
 
-\section{Overview of Technologies}
+\subsection{Objectives}
+The main goal of this study is to answer the question: How does the Hadoop framework
+provide scalability?\\
+\\
+When looking for the answer to this question, we will also keep other secondary learning
+objectives in mind. So our objectives can be listed as:
+\begin{enumerate}[(i)]
+        \item Basics of Hadoop
+        \item History of Hadoop
+        \item Overview of Hadoop FileSystem and MapReduce
+        \item How does Hadoop provides scalability?
+        \item Latest development in the Hadoop ecosystem
+        \item Future of Hadoop
+\end{enumerate}
+
+
+\section{LITERATURE REVIEW}
 The core of Apache Hadoop consists of a storage part, known as Hadoop Distributed File System (HDFS), and a processing part called MapReduce. Hadoop splits files into large blocks and distributes them across nodes in cluster. To process data, Hadoop transfers packaged code for nodes to process in parallel
 based on the data that needs to be processed. This approach takes advantage of data locality - nodes manipulating tha data they have access to - to allow the dataset to be processes faster and more efficiently than it would be in a more conventional supercomputer architecture that relies on a parallel file 
 system where computation and data are distributed via high-speed networking.
@@ -103,90 +239,88 @@ system where computation and data are distributed via high-speed networking.
         \item \textbf{Hadoop Common:}
                 It contains libraries and utilities needed by other Hadoop modules.
         \item \textbf{Hadoop Distributed File System (HDFS):}
-It is a distributed file-system that stores data on commodity machines, providing very high aggregate bandwidth across the cluster.
-It is one of the primary components at the core of Apache Hadoop 1.x. It is an open source projects, inspired by technologies created inside Google.
-\begin{figure}[h!]
-        \centering
-        \includegraphics[width=80mm]{hdfs}
-        \caption{Architecture of Hadoop distributed file system}
-\end{figure}
-The Hadoop distributed file system (HDFS) is a distributed, scalable, and portable file-system written in 
-Java for the Hadoop framework. Each node in a Hadoop instance typically has a single namenode, and a cluster
-of datanodes form the HDFS cluster. The situation is typical because each node does not require a datanode
-to be present. Each datanode serves up blocks of data over the network using a block protocol specific to
-HDFS. The file system uses the TCP/IP layer for communication. Clients use Remote procedure call (RPC) to
-communicate between each other.\\
-\par HDFS stores large files (typically in the range of gigabytes to terabytes) across multiple machines. It achieves reliability by replicating the data across multiple hosts, and hence does not require RAID storage on hosts. With the default replication value, 3, data is stored on three nodes: two on the same rack, and one on a different rack. Data nodes can talk to each other to rebalance data, to move copies around, and to keep the replication of data high. HDFS is not fully POSIX-compliant, because the requirements for a POSIX file-system differ from the target goals for a Hadoop application. The tradeoff of not having a fully POSIX-compliant file-system is increased performance for data throughput and support for non-POSIX operations such as Append.
-\par The HDFS file system includes a so-called secondary namenode, which misleads some people into thinking that when the primary namenode goes offline, the secondary namenode takes over. In fact, the secondary namenode regularly connects with the primary namenode and builds snapshots of the primary namenode's directory information, which the system then saves to local or remote directories. These checkpointed images can be used to restart a failed primary namenode without having to replay the entire journal of file-system actions, then to edit the log to create an up-to-date directory structure. Because the namenode is the single point for storage and management of metadata, it can become a bottleneck for supporting a huge number of files, especially a large number of small files. HDFS Federation, a new addition, aims to tackle this problem to a certain extent by allowing multiple name-spaces served by separate namenodes.
-\par An advantage of using HDFS is data awareness between the job tracker and task tracker. The job tracker schedules map or reduce jobs to task trackers with an awareness of the data location.
-This reduces the amount of traffic that goes over the network and prevents unnecessary data transfer. When Hadoop is used with other file systems, this advantage is not always available. This can have a significant impact on job-completion times, which has been demonstrated when running data-intensive jobs. HDFS was designed for mostly immutable files and may not be suitable for systems requiring concurrent write-operations.
-\par Another limitation of HDFS is that it cannot be mounted directly by an existing operating system. Getting data into and out of the HDFS file system, an action that often needs to be performed before and after executing a job, can be inconvenient. A filesystem in Userspace (FUSE) virtual file system has been developed to address this problem, at least for Linux and some other Unix systems.
-\par File access can be achieved through the native Java API, the Thrift API, to generate a client in the language of the users' choosing (C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C\#, Cocoa, Smalltalk, or OCaml), the command-line interface, or browsed through the HDFS-UI web app over HTTP.
+                It is a distributed file-system that stores data on commodity machines, providing very high aggregate bandwidth across the cluster.
+                It is one of the primary components at the core of Apache Hadoop 1.x. It is an open source projects, inspired by technologies created inside Google.
+                \begin{figure}[h!]
+                        \centering
+                        \includegraphics[width=80mm]{hdfs}
+                        \caption{Architecture of Hadoop distributed file system}
+                \end{figure}
+                The Hadoop distributed file system (HDFS) is a distributed, scalable, and portable file-system written in 
+                Java for the Hadoop framework. Each node in a Hadoop instance typically has a single namenode, and a cluster
+                of datanodes form the HDFS cluster. The situation is typical because each node does not require a datanode
+                to be present. Each datanode serves up blocks of data over the network using a block protocol specific to
+                HDFS. The file system uses the TCP/IP layer for communication. Clients use Remote procedure call (RPC) to
+                communicate between each other.\\
+                \par HDFS stores large files (typically in the range of gigabytes to terabytes) across multiple machines. It achieves reliability by replicating the data across multiple hosts, and hence does not require RAID storage on hosts. With the default replication value, 3, data is stored on three nodes: two on the same rack, and one on a different rack. Data nodes can talk to each other to rebalance data, to move copies around, and to keep the replication of data high. HDFS is not fully POSIX-compliant, because the requirements for a POSIX file-system differ from the target goals for a Hadoop application. The tradeoff of not having a fully POSIX-compliant file-system is increased performance for data throughput and support for non-POSIX operations such as Append.
+                \par The HDFS file system includes a so-called secondary namenode, which misleads some people into thinking that when the primary namenode goes offline, the secondary namenode takes over. In fact, the secondary namenode regularly connects with the primary namenode and builds snapshots of the primary namenode's directory information, which the system then saves to local or remote directories. These checkpointed images can be used to restart a failed primary namenode without having to replay the entire journal of file-system actions, then to edit the log to create an up-to-date directory structure. Because the namenode is the single point for storage and management of metadata, it can become a bottleneck for supporting a huge number of files, especially a large number of small files. HDFS Federation, a new addition, aims to tackle this problem to a certain extent by allowing multiple name-spaces served by separate namenodes.
+                \par An advantage of using HDFS is data awareness between the job tracker and task tracker. The job tracker schedules map or reduce jobs to task trackers with an awareness of the data location.
+                This reduces the amount of traffic that goes over the network and prevents unnecessary data transfer. When Hadoop is used with other file systems, this advantage is not always available. This can have a significant impact on job-completion times, which has been demonstrated when running data-intensive jobs. HDFS was designed for mostly immutable files and may not be suitable for systems requiring concurrent write-operations.
+                \par Another limitation of HDFS is that it cannot be mounted directly by an existing operating system. Getting data into and out of the HDFS file system, an action that often needs to be performed before and after executing a job, can be inconvenient. A filesystem in Userspace (FUSE) virtual file system has been developed to address this problem, at least for Linux and some other Unix systems.
+                \par File access can be achieved through the native Java API, the Thrift API, to generate a client in the language of the users' choosing (C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C\#, Cocoa, Smalltalk, or OCaml), the command-line interface, or browsed through the HDFS-UI web app over HTTP.
 
         \item \textbf{Hadoop MapReduce:}
                 It is an implementation of the MapReduce programming model for large scale data processing
-It is one of the primary components at the core of Apache Hadoop 1.x. It is an open source projects, inspired by technologies created inside Google.
-\begin{figure}[h!]
-        \centering
-        \includegraphics[width=80mm]{mapreduce}
-        \caption{Architecture of Hadoop distributed file system}
-\end{figure}
-With Hadoop distributed file system comes the MapReduce engine, which consists of one JobTracker, to which client applications submit MapReduce jobs.
-The JobTracker pushes work out to available TaskTracker nodes in the cluster, striving to keep the work as close to the data as possible.
-\par With a rack-aware file system, the JobTracker knows which node contains the data, and which other machines are nearby. If the work cannot be hosted on the actual node where the data resides, priority is given to nodes in the same rack. This reduces network traffic on the main backbone network.
-\par If a TaskTracker fails or times out, that part of the job is rescheduled. The TaskTracker on each node spawns off a separate Java Virtual Machine process to prevent the TaskTracker itself from failing if the running job crashes the JVM. A heartbeat is sent from the TaskTracker to the JobTracker every few minutes to check its status. The Job Tracker and TaskTracker status and information is exposed by Jetty and can be viewed from a web browser.
-\par If the JobTracker failed on Hadoop 0.20 or earlier, all ongoing work was lost. Hadoop version 0.21 added some checkpointing to this process. The JobTracker records what it is up to in the file system. When a JobTracker starts up, it looks for any such data, so that it can restart work from where it left off.
-\par MapReduce programming is not a good match for all problems. It’s good for simple information requests and problems that can be divided into independent units, but it's not efficient for iterative and interactive analytic tasks. MapReduce is file-intensive. Because the nodes don’t intercommunicate except through sorts and shuffles, iterative algorithms require multiple map-shuffle/sort-reduce phases to complete. This creates multiple files between MapReduce phases and is inefficient for advanced analytic computing.
+                It is one of the primary components at the core of Apache Hadoop 1.x. It is an open source projects, inspired by technologies created inside Google.
+                \begin{figure}[h!]
+                        \centering
+                        \includegraphics[width=80mm]{mapreduce}
+                        \caption{Architecture of Hadoop distributed file system}
+                \end{figure}
+                With Hadoop distributed file system comes the MapReduce engine, which consists of one JobTracker, to which client applications submit MapReduce jobs.
+                The JobTracker pushes work out to available TaskTracker nodes in the cluster, striving to keep the work as close to the data as possible.
+                \par With a rack-aware file system, the JobTracker knows which node contains the data, and which other machines are nearby. If the work cannot be hosted on the actual node where the data resides, priority is given to nodes in the same rack. This reduces network traffic on the main backbone network.
+                \par If a TaskTracker fails or times out, that part of the job is rescheduled. The TaskTracker on each node spawns off a separate Java Virtual Machine process to prevent the TaskTracker itself from failing if the running job crashes the JVM. A heartbeat is sent from the TaskTracker to the JobTracker every few minutes to check its status. The Job Tracker and TaskTracker status and information is exposed by Jetty and can be viewed from a web browser.
+                \par If the JobTracker failed on Hadoop 0.20 or earlier, all ongoing work was lost. Hadoop version 0.21 added some checkpointing to this process. The JobTracker records what it is up to in the file system. When a JobTracker starts up, it looks for any such data, so that it can restart work from where it left off.
+                \par MapReduce programming is not a good match for all problems. It’s good for simple information requests and problems that can be divided into independent units, but it's not efficient for iterative and interactive analytic tasks. MapReduce is file-intensive. Because the nodes don’t intercommunicate except through sorts and shuffles, iterative algorithms require multiple map-shuffle/sort-reduce phases to complete. This creates multiple files between MapReduce phases and is inefficient for advanced analytic computing.
 
         \item \textbf{Hadoop YARN:}
-            YARN (Yet Another Resource Negotiator) is Hadoop’s cluster resource management
-system. YARN was introduced in Hadoop 2.0 to improve the MapReduce implementation,
-but it is general enough to support other distributed computing paradigms
-as well.\\
+                YARN (Yet Another Resource Negotiator) is Hadoop’s cluster resource management
+                system. YARN was introduced in Hadoop 2.0 to improve the MapReduce implementation,
+                but it is general enough to support other distributed computing paradigms
+                as well.\\
 
-The fundamental idea of YARN is to split up the two major responsibilities of the JobTracker,
-in other words resource management and job scheduling/monitoring, into separate daemons: a
-global ResourceManager and per-application ApplicationMaster (AM). The ResourceManager
-and per-node slave, the NodeManager (NM), form the new, and \textit{generic}, operating system for
-managing applications in a distributed manner. 
+                The fundamental idea of YARN is to split up the two major responsibilities of the JobTracker,
+                in other words resource management and job scheduling/monitoring, into separate daemons: a
+                global ResourceManager and per-application ApplicationMaster (AM). The ResourceManager
+                and per-node slave, the NodeManager (NM), form the new, and \textit{generic}, operating system for
+                managing applications in a distributed manner. 
 
-The ResourceManager is the ultimate authority that arbitrates resources among all the
-applications in the system. The per-application ApplicationMaster is, in effect, a \textit{framework
-specific} entity and is tasked with negotiating resources from the ResourceManager and working
-with the NodeManager(s) to execute and monitor the component tasks.
+                The ResourceManager is the ultimate authority that arbitrates resources among all the
+                applications in the system. The per-application ApplicationMaster is, in effect, a \textit{framework
+                specific} entity and is tasked with negotiating resources from the ResourceManager and working
+                with the NodeManager(s) to execute and monitor the component tasks.
 
-The ResourceManager has a pluggable scheduler component, which is responsible for
-allocating resources to the various running applications subject to familiar constraints of
-capacities, queues etc. The Scheduler is a \textit{pure scheduler} in the sense that it performs no
-monitoring or tracking of status for the application, offering no guarantees on restarting failed
-tasks either due to application failure or hardware failures. The scheduler performs its
-scheduling function based on the \textit{resource requirements} of an application by using the abstract
-notion of a \textit{resource container}, which incorporates resource dimensions such as memory, CPU,
-disk, network etc. 
+                The ResourceManager has a pluggable scheduler component, which is responsible for
+                allocating resources to the various running applications subject to familiar constraints of
+                capacities, queues etc. The Scheduler is a \textit{pure scheduler} in the sense that it performs no
+                monitoring or tracking of status for the application, offering no guarantees on restarting failed
+                tasks either due to application failure or hardware failures. The scheduler performs its
+                scheduling function based on the \textit{resource requirements} of an application by using the abstract
+                notion of a \textit{resource container}, which incorporates resource dimensions such as memory, CPU,
+                disk, network etc. 
 
-The NodeManager is the per-machine slave, which is responsible for launching the
-applications’ containers, monitoring their resource usage (CPU, memory, disk, network), and
-reporting the same to the ResourceManager. 
+                The NodeManager is the per-machine slave, which is responsible for launching the
+                applications’ containers, monitoring their resource usage (CPU, memory, disk, network), and
+                reporting the same to the ResourceManager. 
 
-The per-application ApplicationMaster has the responsibility of negotiating appropriate
-resource containers from the Scheduler, tracking their status and monitoring for progress. From
-the system perspective, the ApplicationMaster itself runs as a normal \textit{container}.
+                The per-application ApplicationMaster has the responsibility of negotiating appropriate
+                resource containers from the Scheduler, tracking their status and monitoring for progress. From
+                the system perspective, the ApplicationMaster itself runs as a normal \textit{container}.
 
-\begin{figure}[h!]
-        \centering
-        \includegraphics[width=80mm]{yarn}
-        \caption{Architectural view of YARN}
-\end{figure}
+                \begin{figure}[h!]
+                        \centering
+                        \includegraphics[width=80mm]{yarn}
+                        \caption{Architectural view of YARN}
+                \end{figure}
 
-One of the crucial implementation details for MapReduce within the new YARN system is the
-reuse of the existing MapReduce framework without any major surgery. This step was very
-important to ensure compatibility for existing MapReduce applications and users. 
-
+                One of the crucial implementation details for MapReduce within the new YARN system is the
+                reuse of the existing MapReduce framework without any major surgery. This step was very
+                important to ensure compatibility for existing MapReduce applications and users. 
 
 \end{enumerate}
-
-
-\section{Hadoop And Scalability}
+\newpage
+\section{FINDINGS}
 
 \subsection{A word on Scalability}
 
@@ -217,17 +351,17 @@ So, almost all the features of Hadoop contribute to its scalability:
 
 \begin{itemize}
 
-    \item \textbf{Cost-Effectiveness:} Hadoop reduces the cost of processing huge amounts of data by making use of cheap, commodity hardware. 
-            It is not necessary to invest heavily on high-end servers and machines. 
-            This cost-effectiveness means that it is easier to scale.
+        \item \textbf{Cost-Effectiveness:} Hadoop reduces the cost of processing huge amounts of data by making use of cheap, commodity hardware. 
+                It is not necessary to invest heavily on high-end servers and machines. 
+                This cost-effectiveness means that it is easier to scale.
 
-    \item \textbf{Flexibility:} Hadoop accepts any type of data, structured or not, as long as they can be stored in a file. 
-            It is schema-less and can join data arbitrarily from multiple sources. 
-            So, the traditional Extract Load Transform (ETL) process can be avoided. 
-            This is the better approach when handling large amounts of data during the scaling process.
+        \item \textbf{Flexibility:} Hadoop accepts any type of data, structured or not, as long as they can be stored in a file. 
+                It is schema-less and can join data arbitrarily from multiple sources. 
+                So, the traditional Extract Load Transform (ETL) process can be avoided. 
+                This is the better approach when handling large amounts of data during the scaling process.
 
-   \item \textbf{Fault-tolerance:} When a node goes down, the system automatically redirects work to another location of the same data. 
-       This type of fault-tolerance is crucial when the amount of data and possibilities of failures grow when scaling.
+        \item \textbf{Fault-tolerance:} When a node goes down, the system automatically redirects work to another location of the same data. 
+                This type of fault-tolerance is crucial when the amount of data and possibilities of failures grow when scaling.
 
 \end{itemize}
 
@@ -290,7 +424,7 @@ Again, Hadoop 2.x solves it with YARN as it decouples the resource management an
 Thus, it allows other distributed computing models like Spark, Hama, Giraph, MPI (Message Passing Interface) and HBase 
 coprocessors to work with Hadoop. 
 
-\section{Future of Hadoop}
+\subsection{Future of Hadoop}
 
 It is forecasted that the global Hadoop market value will reach \$50.2 billion 
 by 2020. In the next few years, more enterprises will adopt a data-driven 
@@ -301,35 +435,35 @@ its challenges. In future, Hadoop will be used by world-class enterprises,
 as well as businesses of all sizes for managing, processing and leveraging 
 data to better serve their customers.
 
-\subsection{Hadoop will Power the Connected World}
+\subsubsection{Hadoop will Power the Connected World}
 As each company connects to various partners, customers, vendors and things,
 the ocean of data grows and becomes intertwined with data lakes and rivers. 
 Hadoop will power this connected world and it will be used to address
 uses cases that require a mix of batch, real-time, streaming and interactive 
 scenarios.
 
-\subsection{Hadoop Will Be Used for Processing and Storing Highly Sensitive Data}
+\subsubsection{Hadoop Will Be Used for Processing and Storing Highly Sensitive Data}
 The lack of built-in security in Hadoop is an obstacle that enterprises face 
 today, but new tools are emerging that address this issue, connecting Kerberos 
 and MapReduce components and ensuring compatibility between data. In Future, 
 expect these issues to resolved and highly regulated organizations to be managing their secure data with Hadoop.
 
-\subsection{Hadoop Will Advance the Internet of Things}
+\subsubsection{Hadoop Will Advance the Internet of Things}
 The Internet of things is only possible with instant data processing and prescriptive analytics. As more things enter the data ecosystem, the burden of processing will become greater and legacy technology will not be able to keep up. Hadoop will be able to, and it will be a mission-critical foundation for many businesses tied to the Internet of things.
 
-\subsection{Hadoop Will Be Used for Critical Day-to-Day Operations}
+\subsubsection{Hadoop Will Be Used for Critical Day-to-Day Operations}
 As Hadoop is used more and the capabilities of YARN become fully realized, more useful opportunities leveraging technology like Apache Spark and Storm will emerge and quickly increase its potential. Even now, real-time/operational analytics are the fastest moving part of the Hadoop ecosystem, and Hadoop will be relied on for day-to-day enterprise operations.
 
-\subsection{Hadoop Will Power the Startup Economy}
+\subsubsection{Hadoop Will Power the Startup Economy}
 Startups represent the future of the industry and are already following the Hadoop path rather than the traditional architectures for cost and efficiency reasons. As they grow, innovate and gain popularity, adoption of their services and Hadoop will correlate, leading to exponential growth.
 
-\subsection{Hadoop Will Accelerate Big Data Adoption}
+\subsubsection{Hadoop Will Accelerate Big Data Adoption}
 Big data is only as good as the quality of data you have. In order to get the most out of data, large amounts of information need to be processed in real time. A recent study found that nearly half of all organizations are developing big data strategies to achieve better decision-making and identify new trends to better engage with customers. Hadoop's low price tag will allow companies of all sizes to adopt big data strategies and begin to benefit from them sooner.
 
-\subsection{Hadoop Will Democratize Data}
+\subsubsection{Hadoop Will Democratize Data}
 New entrants in the IT industry will afford to create and manage their own data warehouses because of the low-cost of Hadoop. This has yet to be adopted due to the inherent complexity of the technology, but even so, companies are beginning to form with the sole purpose of making Hadoop user-friendly. With the current speed of innovation and lower cost of entry, in just five years, we will see small and midsize enterprises investing in their own Hadoop-based infrastructure.
 
-\subsection{Hadoop Will Lead in Infrastructure Spending}
+\subsubsection{Hadoop Will Lead in Infrastructure Spending}
 Hadoop has the potential to completely reshape the IT infrastructure of many companies. The technology may be playing a larger role on the IT road map than in the enterprise right now, but this will flip in the future. In future, most enterprises will have IT strategies that leverage Hadoop, and it will be their greatest infrastructure investment.
 
 \section{Conclusion}
@@ -343,76 +477,62 @@ So, in those cases, a single "scale-up" server might provide similar if not bett
 In any case, Hadoop--especially with the features/improvements added in the 2.x versions--provides excellent scalability and data storage and processing
 capability when working in the peta-scale.
 
-\appendices
-\section*{Acknowledgment}
-
-The authors would like to thank...
-
-
-\ifCLASSOPTIONcaptionsoff
-  \newpage
-\fi
-
 
 \begin{thebibliography}{1}
 
-\bibitem{Apache}
-        \emph{Welcome to Apache Hadoop.}
-        hadoop.apache.org.
-        January 31, 2015.
-\bibitem{Introapache}
-        \emph{An introduction to Apache Hadoop.}
-        https://opensource.com/life/14/8/intro-apache-hadoop-big-data.
-\bibitem{Hadoopadventures}
-        \emph{Adventures with Hadoop and Perl.}
-        Mail-archive.com.
-        May 2, 2010.
-\bibitem{Wikiapache}
-        \emph{Apache Hadoop.}
-        https://en.wikipedia.org/wiki/Apache\_Hadoop.
+        \bibitem{Apache}
+                \emph{Welcome to Apache Hadoop.}
+                hadoop.apache.org.
+                January 31, 2015.
+        \bibitem{Introapache}
+                \emph{An introduction to Apache Hadoop.}
+                https://opensource.com/life/14/8/intro-apache-hadoop-big-data.
+        \bibitem{Hadoopadventures}
+                \emph{Adventures with Hadoop and Perl.}
+                Mail-archive.com.
+                May 2, 2010.
+        \bibitem{Wikiapache}
+                \emph{Apache Hadoop.}
+                https://en.wikipedia.org/wiki/Apache\_Hadoop.
 
-%Scalability
+                %Scalability
 
-\bibitem{Hill1990}
-    Hill, Mark D. \emph{What is scalability?} 
-    ACM SIGARCH Computer Architecture News 18.4 (1990): 18-21.
+        \bibitem{Hill1990}
+                Hill, Mark D. \emph{What is scalability?} 
+                ACM SIGARCH Computer Architecture News 18.4 (1990): 18-21.
 
-\bibitem{Bondi2000}
-    Bondi, André B. \emph{Characteristics of scalability and their impact on performance.}
-    Proceedings of the 2nd international workshop on Software and performance. ACM,
-    2000.
+        \bibitem{Bondi2000}
+                Bondi, André B. \emph{Characteristics of scalability and their impact on performance.}
+                Proceedings of the 2nd international workshop on Software and performance. ACM,
+                2000.
 
-\bibitem{Shvachko2010}
-    K. V. Shvachko, \emph{HDFS Scalability: The limits to growth,} 
-    ;login:. April 2010, pp. 6–16.
+        \bibitem{Shvachko2010}
+                K. V. Shvachko, \emph{HDFS Scalability: The limits to growth,} 
+                ;login:. April 2010, pp. 6–16.
 
-\bibitem{Shvachko2010b}
-    Shvachko, Konstantin, et al. \emph{The hadoop distributed file system.} 
-    Mass Storage Systems and Technologies (MSST), 2010 IEEE 26th Symposium on. IEEE, 2010.
+        \bibitem{Shvachko2010b}
+                Shvachko, Konstantin, et al. \emph{The hadoop distributed file system.} 
+                Mass Storage Systems and Technologies (MSST), 2010 IEEE 26th Symposium on. IEEE, 2010.
 
-\bibitem{Singh2012}
-    Singh, Harcharan Jit. 
-    \emph{High scalability of hdfs using distributed namespace} 
-    Diss. THAPAR UNIVERSITY PATIALA, 2012.
+        \bibitem{Singh2012}
+                Singh, Harcharan Jit. 
+                \emph{High scalability of hdfs using distributed namespace} 
+                Diss. THAPAR UNIVERSITY PATIALA, 2012.
 
-\bibitem{Suresh2011}
-    Srinivas, Suresh.
-    \emph{An Introduction to HDFS Federation}
-    August 2011,
-    http://hortonworks.com/blog/an-introduction-to-hdfs-federation/
+        \bibitem{Suresh2011}
+                Srinivas, Suresh.
+                \emph{An Introduction to HDFS Federation}
+                August 2011,
+                http://hortonworks.com/blog/an-introduction-to-hdfs-federation/
 
-%Conclusion
-\bibitem{Appuswamy2013}
-        Appuswamy, Raja, et al. \emph{Scale-up vs Scale-out for Hadoop: Time to rethink?.} 
-        Proceedings of the 4th annual Symposium on Cloud Computing. ACM, 2013.
+                %Conclusion
+        \bibitem{Appuswamy2013}
+                Appuswamy, Raja, et al. \emph{Scale-up vs Scale-out for Hadoop: Time to rethink?.} 
+                Proceedings of the 4th annual Symposium on Cloud Computing. ACM, 2013.
 
 \end{thebibliography}
 
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{picture}}]{John Doe}
-\blindtext
-\end{IEEEbiography}
+
 
 \end{document}
-
-
