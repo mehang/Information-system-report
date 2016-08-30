@@ -1,0 +1,23 @@
+\select@language {english}
+\contentsline {section}{\hbox to\@tempdima {\hfil } ABSTRACT}{II}
+\contentsline {section}{\hbox to\@tempdima {\hfil } TABLE OF CONTENTS}{III}
+\contentsline {section}{\hbox to\@tempdima {\hfil } LIST OF FIGURES}{IV}
+\contentsline {section}{\numberline {\fontsize {14pt}{0pt}\selectfont 1}INTRODUCTION}{1}
+\contentsline {subsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 1.1}Overview}{1}
+\contentsline {subsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 1.2}Background}{2}
+\contentsline {subsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 1.3}Objectives}{4}
+\contentsline {section}{\numberline {\fontsize {14pt}{0pt}\selectfont 2}LITERATURE REVIEW}{4}
+\contentsline {section}{\numberline {\fontsize {14pt}{0pt}\selectfont 3}FINDINGS}{10}
+\contentsline {subsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.1}A word on Scalability}{10}
+\contentsline {subsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.2}Scalability in Hadoop}{10}
+\contentsline {subsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.3}Limitations on Scalability in Hadoop 1.x and their solutions in Hadoop 2.x}{11}
+\contentsline {subsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4}Future of Hadoop}{13}
+\contentsline {subsubsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4.1}Hadoop will Power the Connected World}{13}
+\contentsline {subsubsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4.2}Hadoop Will Be Used for Processing and Storing Highly Sensitive Data}{13}
+\contentsline {subsubsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4.3}Hadoop Will Advance the Internet of Things}{14}
+\contentsline {subsubsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4.4}Hadoop Will Be Used for Critical Day-to-Day Operations}{14}
+\contentsline {subsubsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4.5}Hadoop Will Power the Startup Economy}{14}
+\contentsline {subsubsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4.6}Hadoop Will Accelerate Big Data Adoption}{14}
+\contentsline {subsubsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4.7}Hadoop Will Democratize Data}{15}
+\contentsline {subsubsection}{\numberline {\fontsize {14pt}{0pt}\selectfont 3.4.8}Hadoop Will Lead in Infrastructure Spending}{15}
+\contentsline {section}{\numberline {\fontsize {14pt}{0pt}\selectfont 4}Conclusion}{15}
