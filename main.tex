@@ -144,8 +144,21 @@
 \newpage
 \section*{ABSTRACT}
 \addcontentsline{toc}{section}{\numberline{} ABSTRACT}
-To write at last.
-Keywords: Hadoop, scalability, distributed system, MapReduce.
+Introduced in 2005, Hadoop has proved to be a ground-breaking technology that has changed the way 
+we handle Big amounts of Data.\\
+\\
+In this case study, we go over the basics of Hadoop and the main technologies that constitute it: especially
+Hadoop Distributed File System (HDFS) and MapReduce.\\
+\\
+We then point out the reasons as to why Hadoop is able to provide scalability to systems that use it. 
+We found it to be related to other features of Hadoop such as Cost-Effectiveness, Flexibility, and Fault-tolerance.
+We also learned about the problems in Hadoop 1.x that hampered scalability of Hadoop Systems, and which were 
+subsequently addressed in Hadoop 2.x.\\
+\\
+We also give our brief findings on the possible future of Hadoop in light of the growth of Hadoop into an ecosystem
+instead of a particular technology.\\
+\\
+Keywords: \textit{Hadoop, scalability, Distributed System, MapReduce.}
 \clearpage
 \thispagestyle{fancy}
 \addcontentsline{toc}{section}{\numberline{} TABLE OF CONTENTS}
@@ -187,19 +200,20 @@ Some key features of Hadoop are:
 \begin{enumerate}[(i)]
         \item \textbf{Ability to store and process huge amounts of any kind of data quickly:}
                 With data volumes and varieties constantly increasing, especially from social media and the Internet of Things(IoT), that’s a key consideration.
-        \item \textbf{Computing power:} Hadoop’s distributed computing model processes big data fast. The more computing nodes you use, the more processing power you have.
+        \item \textbf{Computing power:} Hadoop’s distributed computing model processes big data fast. The more computing nodes used, the more the processing power.
         \item \textbf{Fault tolerance:} Data and application processing are protected against hardware failure. If a node goes down, jobs are automatically redirected to other nodes to make sure the distributed computing does not fail. Multiple copies of all data are stored automatically.
-        \item \textbf{Flexibility:} Unlike traditional relational databases, you don’t have to preprocess data before storing it. You can store as much data as you want and decide how to use it later. That includes unstructured data like text, images and videos.
+        \item \textbf{Flexibility:} Unlike traditional relational databases, we don’t have to preprocess data before storing it. We can store as much data as we want and decide how to use it later. That includes unstructured data like text, images and videos.
         \item \textbf{Low cost:} The open-source framework is free and uses commodity hardware to store large quantities of data.
-        \item \textbf{Scalability:} You can easily grow your system to handle more data simply by adding nodes. Little administration is required.
+        \item \textbf{Scalability:} We can easily grow the system to handle more data simply by adding nodes. Little administration is required.
 \end{enumerate}
 \par Since unstructured data are quite complex and voluminous as they come from a variety
 of sources, such as emails, text documents, videos, photos, audio files,etc., traditional
 database cannot handle them. In such case, hadoop’s ability to join, aggregate, and analyze
 vast stores of multi-source data without having to structure it first allows organizations to
-gain deeper insights quickly. But hadoop must not be confused as a database. You can easily grow your system to handle more data simply by adding nodes. Little administration is required.\\
+gain deeper insights quickly. But hadoop must not be confused as a database. 
+We can easily grow the system to handle more data simply by adding nodes. Little administration is required.\\
 \\
-Hadoop makes it possible to run applicaitons on systems with thousands of nodes involving thousands of terabytes. It's distributed file system facilities rapid
+Hadoop makes it possible to run applicaitons on systems with thousands of nodes involving thousands of terabytes. Its distributed file system facilities rapid
 data transfer rates among nodes and allows the system to continue operating uninterrupted in case of a node failure. This approach lowers the risk of catastrphic system failure,
 even if a significant number of nodes become inoperative.
 
@@ -238,6 +252,11 @@ objectives in mind. So our objective was to learn about the following:
         \item Future of Hadoop
 \end{enumerate}
 
+\subsection{Scope}
+The study only involved literature review on the topic and didn't involve any direct experimentation on our part.
+Also, we only looked at the basic idea behind the way Hadoop provides scalability. We did not go into detail 
+about the new ways/tools in the Hadoop ecosystem that take a different approach.
+\newpage
 
 \section{LITERATURE REVIEW}
 The core of Apache Hadoop consists of a storage part, known as Hadoop Distributed File System (HDFS), and a processing part called MapReduce. Hadoop splits files into large blocks and distributes them across nodes in cluster. To process data, Hadoop transfers packaged code for nodes to process in parallel
@@ -283,15 +302,15 @@ The base Apache Hadoop framework is composed of the following modules:
                         \caption{Architecture of Hadoop distributed file system}
                 \end{figure}
                 With Hadoop distributed file system comes the MapReduce engine, which consists of one JobTracker, to which client applications submit MapReduce jobs.
-                The JobTracker pushes work out to available TaskTracker nodes in the cluster, striving to keep the work as close to the data as possible.
+                The JobTracker pushes work out to available TaskTracker nodes in the cluster, striving to keep the work as close to the data as possible.\\
                 \\
-                With a rack-aware file system, the JobTracker knows which node contains the data, and which other machines are nearby. If the work cannot be hosted on the actual node where the data resides, priority is given to nodes in the same rack. This reduces network traffic on the main backbone network.
+                With a rack-aware file system, the JobTracker knows which node contains the data, and which other machines are nearby. If the work cannot be hosted on the actual node where the data resides, priority is given to nodes in the same rack. This reduces network traffic on the main backbone network.\\
                 \\
-                If a TaskTracker fails or times out, that part of the job is rescheduled. The TaskTracker on each node spawns off a separate Java Virtual Machine process to prevent the TaskTracker itself from failing if the running job crashes the JVM. A heartbeat is sent from the TaskTracker to the JobTracker every few minutes to check its status. The Job Tracker and TaskTracker status and information is exposed by Jetty and can be viewed from a web browser.
+                If a TaskTracker fails or times out, that part of the job is rescheduled. The TaskTracker on each node spawns off a separate Java Virtual Machine process to prevent the TaskTracker itself from failing if the running job crashes the JVM. A heartbeat is sent from the TaskTracker to the JobTracker every few minutes to check its status. The Job Tracker and TaskTracker status and information is exposed by Jetty and can be viewed from a web browser.\\
                 \\
-                If the JobTracker failed on Hadoop 0.20 or earlier, all ongoing work was lost. Hadoop version 0.21 added some checkpointing to this process. The JobTracker records what it is up to in the file system. When a JobTracker starts up, it looks for any such data, so that it can restart work from where it left off.
+                If the JobTracker failed on Hadoop 0.20 or earlier, all ongoing work was lost. Hadoop version 0.21 added some checkpointing to this process. The JobTracker records what it is up to in the file system. When a JobTracker starts up, it looks for any such data, so that it can restart work from where it left off.\\
                 \\
-                MapReduce programming is not a good match for all problems. It’s good for simple information requests and problems that can be divided into independent units, but it's not efficient for iterative and interactive analytic tasks. MapReduce is file-intensive. Because the nodes don’t intercommunicate except through sorts and shuffles, iterative algorithms require multiple map-shuffle/sort-reduce phases to complete. This creates multiple files between MapReduce phases and is inefficient for advanced analytic computing.
+                MapReduce programming is not a good match for all problems. It’s good for simple information requests and problems that can be divided into independent units, but it's not efficient for iterative and interactive analytic tasks. MapReduce is file-intensive. Because the nodes don’t intercommunicate except through sorts and shuffles, iterative algorithms require multiple map-shuffle/sort-reduce phases to complete. This creates multiple files between MapReduce phases and is inefficient for advanced analytic computing.\\
 
         \item \textbf{Hadoop YARN:}
                 YARN (Yet Another Resource Negotiator) is Hadoop’s cluster resource management
@@ -358,23 +377,6 @@ The study was conducted in four phases:
 
 \subsection{The workings of MapReduce}
 
-Hadoop provides the distributed filesystem and runs MapReduce jobs on servers near the data stored on 
-the filesystem -or any other supported filesystem, of which there is more than one.
-A distributed filesystem spreads multiple copies of the data across different machines. This not only 
-offers reliability without the need for RAID-controlled disks, it offers multiple locations to run the 
-mapping. If a machine with one copy of the data is busy or offline, another machine can be used. 
-MapReduce is the key algorithm that the Hadoop MapReduce engine uses to distribute work around a cluster. 
-The key aspect of the MapReduce algorithm is that if every Map and Reduce is independent of all other 
-ongoing Maps and Reduces, then the operation can be run in parallel on different keys and lists of data. 
-On a large cluster of machines, you can go one step further, and run the Map operations on servers 
-where the data lives. Rather than copy the data over the network to the program, you push out the program 
-to the machines. The output list can then be saved to the distributed filesystem, and the reducers run 
-to merge the results. Again, it may be possible to run these in parallel, each reducing different keys. 
-A job scheduler (in Hadoop, the JobTracker), keeps track of which MapReduce jobs are executing, schedules 
-individual Maps, Reduces or intermediate merging operations to specific machines, monitors the success 
-and failures of these individual Tasks, and works to complete the entire batch job. 
-The filesystem and Job scheduler can somehow be accessed by the people and programs that wish to read 
-and write data, and to submit and monitor MapReduce jobs. 
 The following describes how MapReduce operations are carried out in Hadoop. 
 
 \begin{enumerate}[(i)]
@@ -396,7 +398,7 @@ The following describes how MapReduce operations are carried out in Hadoop.
                 supplied Mapper does whatever it wants with the input pair and calls OutputCollector.collect with key
                 -value pairs of its own choosing. The output it generates must use one key class and one value class. 
                 This is because the Map output will be written into a SequenceFile which has per-file type information 
-                and all the records must have the same type (use subclassing if you want to output different data structures). 
+                and all the records must have the same type. 
                 The Map input and output key-value pairs are not necessarily related typewise or in cardinality.\\ 
                 \\
                 When Mapper output is collected it is partitioned, which means that it will be written to the output 
@@ -527,8 +529,8 @@ Hadoop 2.x tackled this issue by introducing features such as the Hadoop Federat
 Federation makes use of multiple namenodes/namespaces that are federated meaning they are independent and do not 
 require coordination with each other. The datanodes are used as common storage for blocks by all the namenodes. 
 Each datanode registers with all the namenodes in the cluster. Datanodes send periodic heartbeats and block reports 
-and handles commands from the namenodes.\cite{Suresh2011}
-
+and handles commands from the namenodes.\cite{Suresh2011}\\
+\\
 \textbf{Overburdened JobTracker}\\
 In Hadoop 1.0, there is tight coupling between Cluster Resource Management and MapReduce programming model. 
 Job Tracker, which does resource management, is part of the MapReduce Framework. 
@@ -537,8 +539,8 @@ resource management, job and task scheduling, monitoring, etc while a lot of mac
 \\
 Hadoop 2.x solved this issue by introducing YARN which splits the two major functionalities of Job Tracker—resource 
 management and job scheduling/monitoring into two separate components: Resource manager and Node Manager. 
-YARN also took over the task of cluster management from MapReduce so that MapReduce is streamlined to only perform Data Processing.
-
+YARN also took over the task of cluster management from MapReduce so that MapReduce is streamlined to only perform Data Processing.\\
+\\
 \textbf{Limitation in running non-MapReduce Application}\\
 Another of the ill-effects of Job tracker’s tight integration with MapReduce in Hadoop 1.0 is that only supporting application 
 that obeys MapReduce programming framework can run on Hadoop.\\ 
@@ -554,46 +556,46 @@ coprocessors to work with Hadoop.
 
 \subsection{Future of Hadoop}
 
-It is forecasted that the global Hadoop market value will reach \$50.2 billion 
-by 2020. In the next few years, more enterprises will adopt a data-driven 
-business and will look to Hadoop to support their growth. Hadoop will allow 
-for leaner, faster and more efficient enterprises. The focus on Hadoop will 
-also create opportunities for new entrants in the market, to rise to and solve 
-its challenges. In future, Hadoop will be used by world-class enterprises, 
-as well as businesses of all sizes for managing, processing and leveraging 
-data to better serve their customers.
+\subsubsection{Hadoop as an ecosystem}
 
-\subsubsection{Hadoop will Power the Connected World}
-As each company connects to various partners, customers, vendors and things,
-the ocean of data grows and becomes intertwined with data lakes and rivers. 
-Hadoop will power this connected world and it will be used to address
-uses cases that require a mix of batch, real-time, streaming and interactive 
-scenarios.
+In recent years, Hadoop has grown from an individual system to an ecosystem of 
+various Big Data Technologies.
 
-\subsubsection{Hadoop Will Be Used for Processing and Storing Highly Sensitive Data}
+Such technologies include: Apache Hive, Apache Spark, Apache Ambari, Apache Pig,
+Apache HBase, Cassandra, Mahout, Zookeeper, etc. Many of these technologies either 
+replace or complement the original HDFS and MapReduce systems.
+
+As an example, Spark can outperform Hadoop by 10x in iterative machine learning jobs, 
+and can be used to interactively query a 39 GB dataset with sub-second response time.\cite{Zaharia2010}
+And so, it has replaced MapReduce as the standard choice of framework to be used with HDFS. 
+
+\subsubsection{Hadoop Areas of Usage}
+
+When we extend the original definition/scope of Hadoop, to that of a whole ecosystem, its
+future is sure to be full of growth and development.
+
+Some areas that it can prosper in are:
+
+\begin{itemize}
+    \item \textit{Processing and Storing Highly Sensitive Data}:
 The lack of built-in security in Hadoop is an obstacle that enterprises face 
 today, but new tools are emerging that address this issue, connecting Kerberos 
 and MapReduce components and ensuring compatibility between data. In Future, 
 expect these issues to resolved and highly regulated organizations to be managing their secure data with Hadoop.
 
-\subsubsection{Hadoop Will Advance the Internet of Things}
-The Internet of things is only possible with instant data processing and prescriptive analytics. As more things enter the data ecosystem, the burden of processing will become greater and legacy technology will not be able to keep up. Hadoop will be able to, and it will be a mission-critical foundation for many businesses tied to the Internet of things.
+    \item \textit{Internet of Things}:
+The Internet of things is only possible with instant data processing and prescriptive analytics. 
+As more things enter the data ecosystem, the burden of processing will become greater and legacy technology will 
+not be able to keep up. Hadoop will be able to, and it will be a mission-critical foundation for many businesses 
+tied to the Internet of things.
 
-\subsubsection{Hadoop Will Be Used for Critical Day-to-Day Operations}
-As Hadoop is used more and the capabilities of YARN become fully realized, more useful opportunities leveraging technology like Apache Spark and Storm will emerge and quickly increase its potential. Even now, real-time/operational analytics are the fastest moving part of the Hadoop ecosystem, and Hadoop will be relied on for day-to-day enterprise operations.
+    \item \textit{Startup Economy}:
+Startups represent the future of the industry and are already following the Hadoop path rather than the 
+traditional architectures for cost and efficiency reasons. As they grow, innovate and gain popularity, 
+adoption of their services and Hadoop will correlate, leading to exponential growth.
+\end{itemize}
 
-\subsubsection{Hadoop Will Power the Startup Economy}
-Startups represent the future of the industry and are already following the Hadoop path rather than the traditional architectures for cost and efficiency reasons. As they grow, innovate and gain popularity, adoption of their services and Hadoop will correlate, leading to exponential growth.
-
-\subsubsection{Hadoop Will Accelerate Big Data Adoption}
-Big data is only as good as the quality of data you have. In order to get the most out of data, large amounts of information need to be processed in real time. A recent study found that nearly half of all organizations are developing big data strategies to achieve better decision-making and identify new trends to better engage with customers. Hadoop's low price tag will allow companies of all sizes to adopt big data strategies and begin to benefit from them sooner.
-
-\subsubsection{Hadoop Will Democratize Data}
-New entrants in the IT industry will afford to create and manage their own data warehouses because of the low-cost of Hadoop. This has yet to be adopted due to the inherent complexity of the technology, but even so, companies are beginning to form with the sole purpose of making Hadoop user-friendly. With the current speed of innovation and lower cost of entry, in just five years, we will see small and midsize enterprises investing in their own Hadoop-based infrastructure.
-
-\subsubsection{Hadoop Will Lead in Infrastructure Spending}
-Hadoop has the potential to completely reshape the IT infrastructure of many companies. The technology may be playing a larger role on the IT road map than in the enterprise right now, but this will flip in the future. In future, most enterprises will have IT strategies that leverage Hadoop, and it will be their greatest infrastructure investment.
-
+\newpage
 \section{Conclusion}
 Ever since its introduction, Hadoop has been proving to be a boon for the field of Big Data.\\ 
 \\
@@ -605,6 +607,7 @@ In any case, Hadoop--especially with the features/improvements added in the 2.x 
 capability when working in the peta-scale.
 
 
+\newpage
 \begin{thebibliography}{1}
 
         \bibitem{Apache}
@@ -651,6 +654,11 @@ capability when working in the peta-scale.
                 \emph{An Introduction to HDFS Federation}
                 August 2011,
                 http://hortonworks.com/blog/an-introduction-to-hdfs-federation/
+
+        \bibitem{Zaharia2010}
+                Zaharia, Matei, et al. 
+                \emph{Spark: cluster computing with working sets.} 
+                HotCloud 10 (2010): 10-10.
 
                 %Conclusion
         \bibitem{Appuswamy2013}
