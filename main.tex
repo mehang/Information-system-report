@@ -224,11 +224,11 @@ Cloudera was founded in 2008 to commercialize Apache Hadoop, with an awareness o
 intelligence applicaitons as well.
 
 \subsection{Objectives}
-The main goal of this study is to answer the question: How does the Hadoop framework
+The main goal of this study was to answer the question: How does the Hadoop framework
 provide scalability?\\
 \\
-When looking for the answer to this question, we will also keep other secondary learning
-objectives in mind. So our objectives can be listed as:
+When looking for the answer to this question, we also kept other secondary learning
+objectives in mind. So our objective was to learn about the following:
 \begin{enumerate}[(i)]
         \item Basics of Hadoop
         \item History of Hadoop
@@ -342,39 +342,100 @@ The base Apache Hadoop framework is composed of the following modules:
 \newpage
 \section{METHODOLOGY}
 
-Hadoop provides the distributed filesystem and runs MapReduce jobs on servers near the data stored on the filesystem -or any other supported filesystem, of which there is more than one.
-A distributed filesystem spreads multiple copies of the data across different machines. This not only offers reliability without the need for RAID-controlled disks, it offers multiple locations to run the mapping. If a machine with one copy of the data is busy or offline, another machine can be used. 
-MapReduce is the key algorithm that the Hadoop MapReduce engine uses to distribute work around a cluster. 
-The key aspect of the MapReduce algorithm is that if every Map and Reduce is independent of all other ongoing Maps and Reduces, then the operation can be run in parallel on different keys and lists of data. On a large cluster of machines, you can go one step further, and run the Map operations on servers where the data lives. Rather than copy the data over the network to the program, you push out the program to the machines. The output list can then be saved to the distributed filesystem, and the reducers run to merge the results. Again, it may be possible to run these in parallel, each reducing different keys. 
-A job scheduler (in Hadoop, the JobTracker), keeps track of which MapReduce jobs are executing, schedules individual Maps, Reduces or intermediate merging operations to specific machines, monitors the success and failures of these individual Tasks, and works to complete the entire batch job. 
-The filesystem and Job scheduler can somehow be accessed by the people and programs that wish to read and write data, and to submit and monitor MapReduce jobs. 
-The following describes how MapReduce operations are carried out in Hadoop. 
+The study was conducted in four phases:
 
+\begin{enumerate}
+    \item \textit{Phase I}: Here, we went over the general descriptions of Hadoop and its working principles through online sources such as articles, hadoop wiki, etc.
+    \item \textit{Phase II}: We then searched for scholarly papers and articles that allowed us to build on our primitive knowledge acquired from phase I. 
+        At the end of this phase, we had a collection of scholarly works relevant to our study.
+    \item \textit{Phase III}: The next phase involved filtering the papers and articles collected so that we ended up with only those that we deemed to be important in fulfilling our goals. 
+        We then delved deep into their contents.
+    \item \textit{Phase IV}: In the final phase, we prepared the report detailing our findings.
+\end{enumerate}
+
+\newpage
+\section{FINDINGS}
+
+\subsection{The workings of MapReduce}
+
+Hadoop provides the distributed filesystem and runs MapReduce jobs on servers near the data stored on 
+the filesystem -or any other supported filesystem, of which there is more than one.
+A distributed filesystem spreads multiple copies of the data across different machines. This not only 
+offers reliability without the need for RAID-controlled disks, it offers multiple locations to run the 
+mapping. If a machine with one copy of the data is busy or offline, another machine can be used. 
+MapReduce is the key algorithm that the Hadoop MapReduce engine uses to distribute work around a cluster. 
+The key aspect of the MapReduce algorithm is that if every Map and Reduce is independent of all other 
+ongoing Maps and Reduces, then the operation can be run in parallel on different keys and lists of data. 
+On a large cluster of machines, you can go one step further, and run the Map operations on servers 
+where the data lives. Rather than copy the data over the network to the program, you push out the program 
+to the machines. The output list can then be saved to the distributed filesystem, and the reducers run 
+to merge the results. Again, it may be possible to run these in parallel, each reducing different keys. 
+A job scheduler (in Hadoop, the JobTracker), keeps track of which MapReduce jobs are executing, schedules 
+individual Maps, Reduces or intermediate merging operations to specific machines, monitors the success 
+and failures of these individual Tasks, and works to complete the entire batch job. 
+The filesystem and Job scheduler can somehow be accessed by the people and programs that wish to read 
+and write data, and to submit and monitor MapReduce jobs. 
+The following describes how MapReduce operations are carried out in Hadoop. 
 
 \begin{enumerate}[(i)]
         \item \textbf{The Map:}
-                As the Map operation is parallelized the input file set is first split to several pieces called FileSplits. If an individual file is so large that it will affect seek time it will be split to several Splits. The splitting does not know anything about the input file's internal logical structure, for example line-oriented text files are split on arbitrary byte boundaries. Then a new map task is created per FileSplit.\\ 
+                As the Map operation is parallelized the input file set is first split to several pieces 
+                called FileSplits. If an individual file is so large that it will affect seek time it will be split 
+                to several Splits. The splitting does not know anything about the input file's internal logical structure, 
+                for example line-oriented text files are split on arbitrary byte boundaries. Then a new map task is created per FileSplit.\\ 
                 \\
-                When an individual map task starts it will open a new output writer per configured reduce task. It will then proceed to read its FileSplit using the RecordReader it gets from the specified InputFormat. InputFormat parses the input and generates key-value pairs. InputFormat must also handle records that may be split on the FileSplit boundary. For example TextInputFormat will read the last line of the FileSplit past the split boundary and, when reading other than the first FileSplit, TextInputFormat ignores the content up to the first newline.\\ 
+                When an individual map task starts it will open a new output writer per configured reduce task. It will 
+                then proceed to read its FileSplit using the RecordReader it gets from the specified InputFormat. InputFormat 
+                parses the input and generates key-value pairs. InputFormat must also handle records that may be split on the FileSplit boundary. For example TextInputFormat will read the last line of the FileSplit past the split boundary and, when reading other than the first FileSplit, TextInputFormat ignores the content up to the first newline.\\ 
                 \\
-                It is not necessary for the InputFormat to generate both meaningful keys and values. For example the default output from TextInputFormat consists of input lines as values and somewhat meaninglessly line start file offsets as keys - most applications only use the lines and ignore the offsets.\\
+                It is not necessary for the InputFormat to generate both meaningful keys and values. For example the 
+                default output from TextInputFormat consists of input lines as values and somewhat meaninglessly line 
+                start file offsets as keys - most applications only use the lines and ignore the offsets.\\
                 \\
-                As key-value pairs are read from the RecordReader they are passed to the configured Mapper. The user supplied Mapper does whatever it wants with the input pair and calls OutputCollector.collect with key-value pairs of its own choosing. The output it generates must use one key class and one value class. This is because the Map output will be written into a SequenceFile which has per-file type information and all the records must have the same type (use subclassing if you want to output different data structures). The Map input and output key-value pairs are not necessarily related typewise or in cardinality.\\ 
+                As key-value pairs are read from the RecordReader they are passed to the configured Mapper. The user 
+                supplied Mapper does whatever it wants with the input pair and calls OutputCollector.collect with key
+                -value pairs of its own choosing. The output it generates must use one key class and one value class. 
+                This is because the Map output will be written into a SequenceFile which has per-file type information 
+                and all the records must have the same type (use subclassing if you want to output different data structures). 
+                The Map input and output key-value pairs are not necessarily related typewise or in cardinality.\\ 
                 \\
-                When Mapper output is collected it is partitioned, which means that it will be written to the output specified by the Partitioner. The default HashPartitioner uses the hashcode function on the key's class (which means that this hashcode function must be good in order to achieve an even workload across the reduce tasks).\\ 
+                When Mapper output is collected it is partitioned, which means that it will be written to the output 
+                specified by the Partitioner. The default HashPartitioner uses the hashcode function on the key's class 
+                (which means that this hashcode function must be good in order to achieve an even workload across the reduce tasks).\\ 
                 \\
-                N input files will generate M map tasks to be run and each map task will generate as many output files as there are reduce tasks configured in the system. Each output file will be targeted at a specific reduce task and the map output pairs from all the map tasks will be routed so that all pairs for a given key end up in files targeted at a specific reduce task.
+                N input files will generate M map tasks to be run and each map task will generate as many output files 
+                as there are reduce tasks configured in the system. Each output file will be targeted at a specific reduce 
+                task and the map output pairs from all the map tasks will be routed so that all pairs for a given key end up in 
+                files targeted at a specific reduce task.
 
-        \item \textbf{Combine:} When the map operation outputs its pairs they are already available in memory. For efficiency reasons, sometimes it makes sense to take advantage of this fact by supplying a combiner class to perform a reduce-type function. If a combiner is used then the map key-value pairs are not immediately written to the output. Instead they will be collected in lists, one list per each key value. When a certain number of key-value pairs have been written, this buffer is flushed by passing all the values of each key to the combiner's reduce method and outputting the key-value pairs of the combine operation as if they were created by the original map operation.\\ 
+        \item \textbf{Combine:} When the map operation outputs its pairs they are already available in memory. For efficiency 
+            reasons, sometimes it makes sense to take advantage of this fact by supplying a combiner class to perform 
+            a reduce-type function. If a combiner is used then the map key-value pairs are not immediately written 
+            to the output. Instead they will be collected in lists, one list per each key value. When a certain 
+            number of key-value pairs have been written, this buffer is flushed by passing all the values of each 
+            key to the combiner's reduce method and outputting the key-value pairs of the combine operation as if 
+            they were created by the original map operation.\\ 
                 \\
-                For example, a word count MapReduce application whose map operation outputs (word, 1) pairs as words are encountered in the input can use a combiner to speed up processing. A combine operation will start gathering the output in in-memory lists (instead of on disk), one list per word. Once a certain number of pairs is output, the combine operation will be called once per unique word with the list available as an iterator. The combiner then emits (word, count-in-this-part-of-the-input) pairs. From the viewpoint of the Reduce operation this contains the same information as the original Map output, but there should be far fewer pairs output to disk and read from disk. 
+                For example, a word count MapReduce application whose map operation outputs (word, 1) pairs as words 
+                are encountered in the input can use a combiner to speed up processing. A combine operation will start 
+                gathering the output in in-memory lists (instead of on disk), one list per word. Once a certain number 
+                of pairs is output, the combine operation will be called once per unique word with the list available 
+                as an iterator. The combiner then emits (word, count-in-this-part-of-the-input) pairs. From the viewpoint 
+                of the Reduce operation this contains the same information as the original Map output, but there should 
+                be far fewer pairs output to disk and read from disk. 
 
         \item \textbf{The Reduce:}
-                When a reduce task starts, its input is scattered in many files across all the nodes where map tasks ran. If run in distributed mode these need to be first copied to the local filesystem in a copy phase.\\ 
+                When a reduce task starts, its input is scattered in many files across all the nodes where map tasks 
+                ran. If run in distributed mode these need to be first copied to the local filesystem in a copy phase.\\ 
                 \\
-                Once all the data is available locally it is appended to one file in an append phase. The file is then merge sorted so that the key-value pairs for a given key are contiguous (sort phase). This makes the actual reduce operation simple: the file is read sequentially and the values are passed to the reduce method with an iterator reading the input file until the next key value is encountered.\\
+                Once all the data is available locally it is appended to one file in an append phase. The file is then 
+                merge sorted so that the key-value pairs for a given key are contiguous (sort phase). This makes the 
+                actual reduce operation simple: the file is read sequentially and the values are passed to the reduce 
+                method with an iterator reading the input file until the next key value is encountered.\\
                 \\
-                At the end, the output will consist of one output file per executed reduce task. The format of the files can be specified with JobConfigurer by setting output format. If SequentialOutputFormat is used then the output key and value classes must also be specified. 
+                At the end, the output will consist of one output file per executed reduce task. The format of the files 
+                can be specified with JobConfigurer by setting output format. If SequentialOutputFormat is used then 
+                the output key and value classes must also be specified. 
 
 \end{enumerate}
 \begin{figure}[h!]
@@ -390,10 +451,6 @@ So the summarized MapReduce flow will be:
         \item Finally, reducers combine them all to get a consolidated output as per the logic.
         \item This algorithm embraces scalability as depending on the size of the input data, we can keep increasing the number of the parallel processing units.
 \end{enumerate}
-
-
-\newpage
-\section{FINDINGS}
 
 \subsection{A word on Scalability}
 
